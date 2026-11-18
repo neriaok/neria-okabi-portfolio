@@ -1,0 +1,65 @@
+:global(.has-cursor),
+:global(.has-cursor) a,
+:global(.has-cursor) button {
+  cursor: none;
+}
+
+.dot,
+.ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 110;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  background: var(--txt);
+  mix-blend-mode: difference;
+}
+
+.ring {
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 1px solid rgba(242, 239, 232, 0.5);
+  display: grid;
+  place-items: center;
+  transition: width 0.4s var(--ease-out), height 0.4s var(--ease-out), margin 0.4s var(--ease-out), background 0.4s, border-color 0.4s, opacity 0.3s;
+}
+
+.ring span {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--bg);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.ring[data-state='hover'] {
+  width: 64px;
+  height: 64px;
+  margin: -32px 0 0 -32px;
+  border-color: var(--lime);
+  background: rgba(215, 255, 90, 0.08);
+}
+
+.ring[data-state='view'] {
+  width: 96px;
+  height: 96px;
+  margin: -48px 0 0 -48px;
+  background: var(--lime);
+  border-color: var(--lime);
+}
+
+.ring[data-state='view'] span {
+  opacity: 1;
+}
+
+.ring[data-state='hide'] {
+  opacity: 0;
+}
