@@ -1,0 +1,44 @@
+.source {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form,
+.plane {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  display: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.plane {
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 16px 20px rgba(0, 10, 30, 0.45));
+}
+
+.flash {
+  position: fixed;
+  z-index: 41;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(230, 245, 255, 0.9) 0%, rgba(120, 190, 255, 0.45) 32%, rgba(80, 160, 255, 0) 70%);
+  mix-blend-mode: screen;
+}
+
+/* the dashboard lights up cool blue as the request lands */
+.hit {
+  animation: planeHit 1.5s cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+@keyframes planeHit {
+  0% { filter: none; }
+  22% { filter: drop-shadow(0 0 26px rgba(110, 180, 255, 0.75)) brightness(1.12); }
+  100% { filter: none; }
+}

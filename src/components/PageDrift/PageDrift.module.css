@@ -1,0 +1,44 @@
+.source {
+  position: fixed;
+  width: 2px;
+  height: 2px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form,
+.page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  display: none;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+
+.page {
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 14px 18px rgba(20, 10, 0, 0.45));
+}
+
+.flash {
+  position: fixed;
+  z-index: 41;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 246, 220, 0.9) 0%, rgba(255, 210, 130, 0.45) 32%, rgba(255, 190, 90, 0) 70%);
+  mix-blend-mode: screen;
+}
+
+/* the screen glows warm for a moment as the page sinks into it */
+.hit {
+  animation: pageHit 1.6s cubic-bezier(0.22, 0.9, 0.24, 1);
+}
+
+@keyframes pageHit {
+  0% { filter: none; }
+  22% { filter: drop-shadow(0 0 26px rgba(255, 196, 110, 0.7)) brightness(1.15) sepia(0.2); }
+  100% { filter: none; }
+}
