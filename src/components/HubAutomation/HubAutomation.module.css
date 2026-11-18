@@ -1,0 +1,161 @@
+.wrap {
+  position: relative;
+  padding-bottom: 150px;
+}
+
+.flow {
+  position: relative;
+  margin: 26px auto 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(100%, 520px);
+}
+
+.node {
+  position: relative;
+  flex: none;
+  font-family: var(--mono);
+  font-size: 11.5px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  background: rgba(10, 12, 20, 0.7);
+  color: var(--txt);
+}
+
+.node small {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  white-space: nowrap;
+  font-size: 10.5px;
+  color: var(--accent);
+  opacity: 0;
+}
+
+.track {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 60%, transparent), rgba(255, 255, 255, 0.15));
+}
+
+.track i {
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 12px var(--accent);
+}
+
+.mails {
+  position: absolute;
+  inset-inline-end: 4%;
+  bottom: 0;
+  width: min(320px, 86%);
+  height: 150px;
+}
+
+.mail {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #f6f7fb;
+  color: #12131a;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.45);
+  font-size: 12.5px;
+  opacity: 0;
+}
+
+.mail header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: #5c6070;
+  margin-bottom: 6px;
+}
+
+.mail header em {
+  margin-inline-start: auto;
+  font-style: normal;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3d6fb8;
+}
+
+.ok {
+  background: #2f9e6b;
+}
+
+.mail strong {
+  display: block;
+  font-size: 13.5px;
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+.mail dl {
+  display: grid;
+  gap: 2px;
+  margin-bottom: 10px;
+}
+
+.mail dl div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mail dt {
+  color: #6b6f80;
+}
+
+.mail p {
+  color: #3a3d4a;
+  margin-bottom: 10px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: #3d6fb8;
+  color: #fff;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.caption {
+  position: absolute;
+  inset-inline-start: 0;
+  bottom: 0;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--mute);
+  max-width: 40%;
+}
+
+@media (max-width: 760px) {
+  .caption {
+    position: static;
+    display: block;
+    max-width: none;
+    margin-top: 168px;
+  }
+  .wrap {
+    padding-bottom: 0;
+  }
+  .mails {
+    bottom: 22px;
+    right: 7%;
+  }
+}
