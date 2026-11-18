@@ -1,0 +1,157 @@
+/* desktop: a slim rail in the left gutter, so it never covers content */
+.hud {
+  position: fixed;
+  z-index: 40;
+  left: 18px;
+  top: 50%;
+  transform: translate(-12px, -50%);
+  width: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  pointer-events: none;
+}
+
+.visible {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.num {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--display);
+  line-height: 1;
+}
+
+.count {
+  display: inline-block;
+  font-size: 26px;
+  color: var(--txt);
+}
+
+.num small {
+  font-size: 12px;
+  color: var(--mute);
+  margin-top: 2px;
+}
+
+.label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.bar {
+  display: none;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 8px);
+  gap: 6px;
+}
+
+.cell {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  transition: background 0.5s var(--ease), box-shadow 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
+.on {
+  background: var(--c);
+  box-shadow: 0 0 10px var(--c);
+  transform: scale(1.2);
+}
+
+.fresh {
+  position: absolute;
+  left: 52px;
+  bottom: 0;
+  list-style: none;
+  display: grid;
+  gap: 4px;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--c);
+}
+
+.fresh li {
+  opacity: 0;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(8, 8, 11, 0.6);
+  backdrop-filter: blur(6px);
+  border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+}
+
+/* mobile: a compact pill under the nav */
+@media (max-width: 760px) {
+  .hud {
+    left: 50%;
+    top: max(64px, calc(env(safe-area-inset-top) + 56px));
+    transform: translate(-50%, -10px);
+    width: auto;
+    flex-direction: row;
+    gap: 10px;
+    padding: 6px 12px;
+    border-radius: 30px;
+    background: rgba(8, 8, 11, 0.55);
+    border: 1px solid var(--line);
+    backdrop-filter: blur(10px);
+  }
+  .visible {
+    transform: translate(-50%, 0);
+  }
+  .head {
+    flex-direction: row;
+  }
+  .num {
+    flex-direction: row;
+    align-items: baseline;
+  }
+  .count {
+    font-size: 18px;
+  }
+  .label {
+    writing-mode: horizontal-tb;
+    transform: none;
+  }
+  .grid,
+  .fresh {
+    display: none;
+  }
+  .bar {
+    display: block;
+    width: 54px;
+    height: 3px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.15);
+    overflow: hidden;
+  }
+  .bar i {
+    display: block;
+    height: 100%;
+    background: linear-gradient(90deg, #c6e877, #8ec5ff, #e77bff, #f0a64b, #f3d58a);
+    transform-origin: left;
+    transition: transform 0.8s var(--ease);
+  }
+}
