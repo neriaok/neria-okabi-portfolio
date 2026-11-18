@@ -1,5 +1,7 @@
 # Neria Okabi · Portfolio
 
+**Live:** [neria-okabi-portfolio.vercel.app](https://neria-okabi-portfolio.vercel.app)
+
 Five projects, told as five cinematic worlds. Scroll drives each scene like a film, the headlines land on the beats, and at the end of every chapter something real falls out of the footage and into the project below it: a tennis ball, a paper plane, a jelly chat bubble, a drop of oil, a torn page.
 
 ![Four of the five chapter worlds](docs/preview.jpg)
@@ -66,4 +68,4 @@ The clips were generated with Google Flow and Gemini, then cut, joined and encod
 
 ---
 
-[LinkedIn](https://www.linkedin.com/in/neria-okabi) · [GitHub](https://github.com/neriaok)
+[Live site](https://neria-okabi-portfolio.vercel.app) · [LinkedIn](https://www.linkedin.com/in/neria-okabi) · [GitHub](https://github.com/neriaok)
