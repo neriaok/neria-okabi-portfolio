@@ -1,0 +1,8 @@
+node_modules
+dist
+*.tsbuildinfo
+.vercel
+.DS_Store
+
+# raw source clips (the encoded versions live in public/)
+clips
