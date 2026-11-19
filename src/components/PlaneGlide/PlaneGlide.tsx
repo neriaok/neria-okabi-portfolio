@@ -2,6 +2,7 @@ import { FC, RefObject, useEffect, useRef } from 'react';
 import { gsap } from '../../utils/gsap';
 import { PlaneGlide as PlaneGlideConfig } from '../../config/scenes';
 import { createKeyer } from '../../utils/keyer';
+import { loadClipInto } from '../../utils/clipLoader';
 import styles from './PlaneGlide.module.css';
 
 interface PlaneGlideProps {
@@ -50,6 +51,8 @@ const PlaneGlide: FC<PlaneGlideProps> = ({ glide, worldRef, panelRef }) => {
     let opacity = 1;
 
     video.addEventListener('loadedmetadata', () => video.play().then(() => video.pause()).catch(() => {}), { once: true });
+
+    const stopLoading = loadClipInto(video, glide.src, worldRef.current);
     const paint = () => keyer?.(video, { opacity });
     video.addEventListener('seeked', paint);
     video.addEventListener('loadeddata', paint);
@@ -187,6 +190,7 @@ const PlaneGlide: FC<PlaneGlideProps> = ({ glide, worldRef, panelRef }) => {
 
     gsap.ticker.add(tick);
     return () => {
+      stopLoading();
       gsap.ticker.remove(tick);
       video.removeEventListener('seeked', paint);
       video.removeEventListener('loadeddata', paint);
@@ -196,7 +200,7 @@ const PlaneGlide: FC<PlaneGlideProps> = ({ glide, worldRef, panelRef }) => {
 
   return (
     <>
-      <video ref={videoRef} className={styles.source} src={glide.src} muted playsInline preload="auto" aria-hidden="true" />
+      <video ref={videoRef} className={styles.source} muted playsInline preload="auto" aria-hidden="true" />
       <canvas ref={formRef} className={styles.form} aria-hidden="true" />
       <img ref={planeRef} className={styles.plane} src={glide.sprite} alt="" aria-hidden="true" />
       <span ref={flashRef} className={styles.flash} aria-hidden="true" />

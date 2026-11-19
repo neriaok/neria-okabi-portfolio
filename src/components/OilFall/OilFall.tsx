@@ -2,6 +2,7 @@ import { FC, RefObject, useEffect, useRef } from 'react';
 import { gsap } from '../../utils/gsap';
 import { DropFall, PORTRAIT_CLIP_QUERY } from '../../config/scenes';
 import { createKeyer } from '../../utils/keyer';
+import { loadClipInto } from '../../utils/clipLoader';
 import styles from './OilFall.module.css';
 
 interface OilFallProps {
@@ -51,6 +52,8 @@ const OilFall: FC<OilFallProps> = ({ fall, worldRef, panelRef }) => {
     let keyOpts = { topFade: 0.2, cutBelow: 1.06, opacity: 1 };
 
     video.addEventListener('loadedmetadata', () => video.play().then(() => video.pause()).catch(() => {}), { once: true });
+
+    const stopLoading = loadClipInto(video, fall.form.src, worldRef.current);
     const paint = () => keyer?.(video, keyOpts);
     video.addEventListener('seeked', paint);
     video.addEventListener('loadeddata', paint);
@@ -191,6 +194,7 @@ const OilFall: FC<OilFallProps> = ({ fall, worldRef, panelRef }) => {
 
     gsap.ticker.add(tick);
     return () => {
+      stopLoading();
       gsap.ticker.remove(tick);
       video.removeEventListener('seeked', paint);
       video.removeEventListener('loadeddata', paint);
@@ -200,7 +204,7 @@ const OilFall: FC<OilFallProps> = ({ fall, worldRef, panelRef }) => {
 
   return (
     <>
-      <video ref={videoRef} className={styles.source} src={fall.form.src} muted playsInline preload="auto" aria-hidden="true" />
+      <video ref={videoRef} className={styles.source} muted playsInline preload="auto" aria-hidden="true" />
       <canvas ref={formRef} className={styles.form} aria-hidden="true" />
       <img ref={dropRef} className={styles.drop} src={fall.sprite} alt="" aria-hidden="true" />
       <span ref={ringRef} className={styles.ring} aria-hidden="true" />

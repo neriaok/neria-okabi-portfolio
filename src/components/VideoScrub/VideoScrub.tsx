@@ -1,6 +1,7 @@
 import { FC, RefObject, useEffect, useRef } from 'react';
 import { gsap, ScrollTrigger } from '../../utils/gsap';
 import { createKeyer } from '../../utils/keyer';
+import { loadClipInto } from '../../utils/clipLoader';
 import styles from './VideoScrub.module.css';
 import { PORTRAIT_CLIP_QUERY } from '../../config/scenes';
 
@@ -48,6 +49,7 @@ const VideoScrub: FC<VideoScrubProps> = ({ src, mobileSrc, triggerRef, tailRef, 
       video.play().then(() => video.pause()).catch(() => {});
     };
     video.addEventListener('loadedmetadata', prime, { once: true });
+    const stopLoading = loadClipInto(video, url, trigger);
 
     const drawTail = () => {
       const tail = tailRef?.current;
@@ -141,6 +143,7 @@ const VideoScrub: FC<VideoScrubProps> = ({ src, mobileSrc, triggerRef, tailRef, 
     window.addEventListener('resize', onResize);
 
     return () => {
+      stopLoading();
       st.kill();
       gsap.ticker.remove(tick);
       io?.disconnect();
@@ -152,7 +155,7 @@ const VideoScrub: FC<VideoScrubProps> = ({ src, mobileSrc, triggerRef, tailRef, 
 
   return (
     <>
-      <video ref={videoRef} className={keyed ? styles.source : styles.video} src={url} muted playsInline preload="auto" aria-hidden="true" />
+      <video ref={videoRef} className={keyed ? styles.source : styles.video} poster={keyed ? undefined : url.replace(/\.mp4$/, '.jpg')} muted playsInline preload="auto" aria-hidden="true" />
       {keyed && <canvas ref={keyRef} className={styles.video} aria-hidden="true" />}
     </>
   );

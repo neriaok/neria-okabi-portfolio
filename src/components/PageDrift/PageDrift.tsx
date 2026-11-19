@@ -128,7 +128,7 @@ const PageDrift: FC<PageDriftProps> = ({ page, worldRef, panelRef }) => {
         // the world clip itself tears the page out; at its last frame (page painted out) the sprite takes over in place
         canvas.style.display = 'none';
         // the sprite lies exactly on the clip's held page, and only leaves it once the clip shows the page painted out
-        const now = worldVideo && worldVideo.duration > 0 ? worldVideo.currentTime : Infinity;
+        const now = worldVideo && worldVideo.duration > 0 ? worldVideo.currentTime : -1; // clip not downloaded yet: nothing to take over from
         if (now < inWorld.holdAt + 0.02 && over < 0.3 * vh) { sprite.style.display = 'none'; landed = false; driftTravel = 0; return; }
         const allowed = now >= inWorld.cleanAt + 0.045 || over > 0.3 * vh ? Math.max(0, over) : 0;
         driftTravel += (allowed - driftTravel) * (allowed > driftTravel ? 0.22 : 1);

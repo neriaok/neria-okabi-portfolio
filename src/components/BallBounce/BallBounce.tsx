@@ -74,7 +74,7 @@ const BallBounce: FC<BallBounceProps> = ({ ball, worldRef, panelRef }) => {
       const over = vh - r.bottom;
       const tear: InWorldTear | undefined = window.matchMedia(PORTRAIT_CLIP_QUERY).matches ? ball.mobile : ball.desktop;
       const video = world.querySelector('video');
-      const now = video && video.duration > 0 ? video.currentTime : Infinity;
+      const now = video && video.duration > 0 ? video.currentTime : -1; // clip not downloaded yet: nothing to take over from
       const el = target();
       if (!tear || !el || (now < tear.holdAt + 0.02 && over < 0.3 * vh)) {
         hide();
